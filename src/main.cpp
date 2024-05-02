@@ -185,9 +185,11 @@ void startCameraServer(){
 
 void setup() {
   WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
- 
+  setCpuFrequencyMhz(240);
+  delay(10);
   Serial.begin(115200);
-  Serial.println("start");
+  Serial.print("start cpu mhz ==>>>>");
+  Serial.println(getCpuFrequencyMhz());
   Serial.setDebugOutput(false);
   
   camera_config_t config;
@@ -245,5 +247,5 @@ void setup() {
 }
 
 void loop() {
-  delay(1);
+  vTaskDelay(1000/portTICK_PERIOD_MS);
 }
